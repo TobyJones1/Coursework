@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <meta charset="UTF-8">
+    <title>homepage</title>
+    <h1>Welcome</h1>
+
+    <script>
+        "use strict";
+
+        function getBookingList() {
+            console.log("Invoked getBookingList()");		//console.log your BFF for debugging client side
+
+            var e = document.getElementById("city");//get value from date picker
+            var city = e.options[e.selectedIndex].value;
+            const url = "/booking/list/";		// API method on webserver will be in Eaten class with @Path of list
+
+            fetch(url + city, {        			// dateEaten as path param
+                method: "GET",
+            }).then(response => {
+                return response.json();                 //return response to JSON
+            }).then(response => {
+                if (response.hasOwnProperty("Error")) { //checks if response from server has a key "Error"
+                    alert(JSON.stringify(response));    // if it does, convert JSON object to string and alert
+                } else {
+                    console.log(response.toString());
+                    //formatList(response);          //this function will create an HTML table of the data (as we
+                    // did in lesson 2
+                }
+            });
+        }
+
+    </script>
+
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body onload="pageLoad()">
+<b> </b>
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="booking.html">Make a Booking </a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+</div>
+
+<form id=location><label>Choose Location:</label>
+
+    <select name="city" id="city">
+        <option value="Newcastle">Newcastle</option>
+        <option value="Manchester">Manchester</option>
+        <option value="Reading">Reading</option>
+    </select>
+    <br><br>
+</form>
+
+<button onclick="getBookingList()"> Next</button>
+</body>
+</html>

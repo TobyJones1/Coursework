@@ -4,13 +4,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import server.Main;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLOutput;
 
 @Path("booking/")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -18,8 +16,8 @@ import java.sql.ResultSet;
 
 public class Booking {
     @GET
-    @Path("list")
-    public String bookingList() {
+    @Path("list/{city}")
+    public String bookingList(@PathParam("city") String city) {
         System.out.println("Invoked Booking.bookingList()");
         JSONArray response = new JSONArray();
         try {
@@ -27,7 +25,8 @@ public class Booking {
                     "                    FROM Bookings" +
                     "                    JOIN Rooms ON Bookings.RoomID=Rooms.RoomID" +
                     "                    JOIN Locations ON Bookings.LocationID = Locations.LocationID" +
-                    "                    WHERE Bookings.UserID IS NULL " );
+                    "                    WHERE Bookings.UserID IS NULL AND City = ? " );
+            ps.setString(1,city);
             ResultSet results = ps.executeQuery();
             while (results.next()==true) {
                 JSONObject row = new JSONObject();
@@ -37,6 +36,7 @@ public class Booking {
                 row.put("Theme", results.getString(4));
                 response.add(row);
             }
+            System.out.println (response.toString());
             return response.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());

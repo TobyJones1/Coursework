@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <meta charset="UTF-8">
     <title>homepage</title>
-    <h1>Welcome</h1>
+    <h1 class="title"> Tobnet Escape Rooms</h1>
 
     <script>
         "use strict";
@@ -40,11 +40,37 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+            background-color: #D9B08C;
+        }
+
+        head {
+            background-color: yellow;
+        }
+
+
+        .title{
+            font-family: Castellar;
+            color: #2c3531;
+            font-weight: bold;
+            font-size: 40px;
+            padding-left:10px;
+        }
+
+        .button{
+            color: lightgrey;
+            background-color:#45A29E;
+            margin-left: 70px;
+            font-family: Verdana;
+            border: 1px solid black;
+        }
+
+        .button:hover{
+            border: 1px solid lightgrey;
         }
 
         .topnav {
             overflow: hidden;
-            background-color: #333;
+            background-color: #116466;
         }
 
         .topnav a {
@@ -53,16 +79,17 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 19px;
+            font-family: Castellar;
         }
 
         .topnav a:hover {
-            background-color: #ddd;
+            background-color: #D1E8E2;
             color: black;
         }
 
         .topnav a.active {
-            background-color: #4CAF50;
+            background-color: #45A29E    ;
             color: white;
         }
     </style>
@@ -70,13 +97,14 @@
 </head>
 
 <body onload="pageLoad()">
-<b> </b>
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="booking.html">Make a Booking </a>
-    <a href="#contact">Contact</a>
+    <a  href="home.html">Home</a>
+    <a class="active" href="booking.html">Make a Booking </a>
+    <a href="rooms.html">Our Rooms</a>
     <a href="#about">About</a>
 </div>
+
+<br> </br>
 
 <form id=location><label>Choose Location:</label>
 
@@ -88,6 +116,16 @@
     <br><br>
 </form>
 
-<button onclick="getBookingList()"> Next</button>
+<form id=Room<label>Choose Room:</label>
+
+    <select name="room" id="room">
+        <option value="Ancient Egypt">Ancient Egypt</option>
+        <option value="Whitechapel">Whitechapel</option>
+        <option value="Space">Space</option>
+    </select>
+    <br><br>
+</form>
+
+<button class = "button" onclick="getBookingList()"> NEXT </button>
 </body>
 </html>

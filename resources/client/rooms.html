@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <meta charset="UTF-8">
+    <title>homepage</title>
+
+    <h1 class="title"> Tobnet Escape Rooms</h1>
+
+    <style>
+
+        head {
+            background-color: yellow;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #D9B08C;
+        }
+
+        .title{
+            font-family: Castellar;
+            color: #2c3531;
+            font-weight: bold;
+            font-size: 40px;
+            padding-left:10px;
+        }
+
+
+        .egypt{
+            font-family: Papyrus;
+            font-size: 30px;
+            padding-left:20px ;
+        }
+
+        .tutankhamun {
+            width: 330px;
+            height: 250px;
+            padding-right: 15px;
+        }
+
+
+
+        .whitechapel{
+            font-family: "Old English Text MT";
+            font-size: 30px;
+            padding-left:20px ;
+        }
+
+        .whitechapelstreets{
+            width: 330px;
+            height: 250px;
+            padding-right: 15px;
+        }
+
+
+
+        .container {
+            padding-left:20px;
+            max-width: 640px;
+            display: flex;
+            font-size: 20px;
+         }
+        &__text {
+             flex: 1 1 auto;
+         }
+        }
+
+        .space{
+            font-family:"Comic Sans MS";
+            font-size: 30px;
+            padding-left: 20px ;
+            padding-bottom: 50px;
+        }
+
+        .spaceship{
+            width: 330px;
+            height: 250px;
+            padding-right: 15px;
+            padding-below:60px;
+        }
+
+
+
+        .topnav {
+            overflow: hidden;
+            background-color: #116466;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 19px;
+            font-family: Castellar;
+        }
+
+        .topnav a:hover {
+            background-color: #D1E8E2;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #45A29E    ;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body onload="pageLoad()">
+
+<div class="topnav">
+    <a href="home.html">Home</a>
+    <a href="booking.html">Make a Booking </a>
+    <a class = "active" href="rooms.html">Our Rooms</a>
+    <a href="#about">About</a>
+</div>
+
+<h2 class = "egypt" > Ancient Egypt</h2>
+<div class="container">
+    <img height = 100px width = 300px class = "tutankhamun" src="https://www.nationalgeographic.com/content/dam/news/photos/000/128/12801.ngsversion.1421960076665.adapt.1900.1.jpg" alt = "Tutankhamun">
+    <div class="container__text">
+        <p > Dive right into the great world of Ancient Egypt. You're in a group of archeologists, exploring Tutankhamun's when suddenly you trigger a trap and you're stuck!
+        Work together and complete the array of puzzles to escape before you're trapped in there forever...</p>
+    </div>
+</div>
+
+<br>
+
+
+<h2 class = "whitechapel" > Whitechapel</h2>
+<div class="container">
+    <img class = "whitechapelstreets" src="https://www.eastlondonadvertiser.co.uk/polopoly_fs/1.3947249!/image/image.jpg_gen/derivatives/landscape_630/image.jpg" alt="Whitechapel Streets">
+    <div class="container__text">
+        <p> Jack the Ripper is on the run and you are out to find him and his true identity. Hurry through the London streets of Whitechapel and solve the
+        clues before he takes his next victim, or worse, makes you his next victim...</p>
+    </div>
+</div>
+
+<h2 class = "space" > Space </h2>
+<div class="container">
+    <img class = "spaceship" src = "https://i.stack.imgur.com/cSReb.jpg" alt = "Spaceship">
+    <div class="container__text">
+        <p> Your spaceship has been hit by an asteroid and you and your fellow astronauts are rapidly losing oxygen supply. Travel around the ship to gather supplies and
+        make repairs before it's too late...</p>
+    </div>
+</div>
+
+<p>   </p>
+</body>
+</html>

@@ -16,8 +16,9 @@
 
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "lucida console", Helvetica, sans-serif;
             background-color: #D9B08C;
+
         }
 
         .title{
@@ -59,27 +60,25 @@
 
         .container {
             padding-left:20px;
-            max-width: 640px;
+            max-width: 700px;
             display: flex;
             font-size: 20px;
-         }
         &__text {
              flex: 1 1 auto;
          }
         }
 
         .space{
-            font-family:"Comic Sans MS";
+            font-family:monospace;
             font-size: 30px;
             padding-left: 20px ;
-            padding-bottom: 50px;
+
         }
 
         .spaceship{
             width: 330px;
             height: 250px;
             padding-right: 15px;
-            padding-below:60px;
         }
 
 
@@ -113,13 +112,18 @@
             color: lightgrey;
             background-color:#45A29E;
             margin-left: 110px;
-            font-family: Verdana;
+            font-family: "lucida console";
             border: 1px solid black;
             width: 140px;
             height:60px;
             font-size: 20px;
             font-weight:bold;
         }
+
+        .booknowbutton:hover{
+            border: 1px solid lightgrey;
+        }
+
     </style>
 
 </head>
@@ -141,9 +145,6 @@
     </div>
 </div>
 
-<br>
-
-
 <h2 class = "whitechapel" > Whitechapel</h2>
 <div class="container">
     <img class = "whitechapelstreets" src="https://www.eastlondonadvertiser.co.uk/polopoly_fs/1.3947249!/image/image.jpg_gen/derivatives/landscape_630/image.jpg" alt="Whitechapel Streets">
@@ -153,7 +154,7 @@
     </div>
 </div>
 
-<h2 class = "space" > Space </h2>
+<h2 class = "space" >  Space </h2>
 <div class="container">
     <img class = "spaceship" src = "https://i.stack.imgur.com/cSReb.jpg" alt = "Spaceship">
     <div class="container__text">
@@ -162,7 +163,7 @@
     </div>
 </div>
 
-<p>   </p>
+<br>
 
 <button class = "booknowbutton" onclick=" window.location.href='booking.html';"> Book Now!</button>
 

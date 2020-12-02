@@ -39,14 +39,14 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "lucida console", Helvetica, sans-serif;
             background-color: #D9B08C;
+            font-size: 17px;
         }
 
         head {
             background-color: yellow;
         }
-
 
         .title{
             font-family: Castellar;
@@ -56,12 +56,21 @@
             padding-left:10px;
         }
 
+        .dropdown{
+            font-family: "Lucida Console";
+            height: 22px;
+            width: 129px;
+        }
+
         .button{
             color: lightgrey;
             background-color:#45A29E;
             margin-left: 70px;
-            font-family: Verdana;
+            font-family: "lucida console";
             border: 1px solid black;
+            width: 100px;
+            height:40px;
+            font-size: 25px;
         }
 
         .button:hover{
@@ -107,7 +116,7 @@
 
 <form id=location><label>Choose Location:</label>
 
-    <select name="city" id="city">
+    <select class = "dropdown" name="city" id="city">
         <option value="Newcastle">Newcastle</option>
         <option value="Manchester">Manchester</option>
         <option value="Reading">Reading</option>
@@ -117,7 +126,7 @@
 
 <form id=Room<label>Choose Room:</label>
 
-    <select name="room" id="room">
+    <select class = "dropdown" name="room" id="room">
         <option value="Ancient Egypt">Ancient Egypt</option>
         <option value="Whitechapel">Whitechapel</option>
         <option value="Space">Space</option>

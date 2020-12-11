@@ -1,5 +1,6 @@
 package controllers;
 
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import server.Main;
@@ -8,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLOutput;
 
 @Path("booking/")
@@ -15,32 +17,67 @@ import java.sql.SQLOutput;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class Booking {
-    @GET
-    @Path("list/{city}")
-    public String bookingList(@PathParam("city") String city) {
-        System.out.println("Invoked Booking.bookingList()");
+    @POST
+    @Path("list")
+    public String bookingList(@FormDataParam("city") String city, @FormDataParam("theme") String theme) {
+        System.out.println("Invoked Booking.bookingList()" + city + theme);
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT Bookings.Date, Bookings.Time, Locations.City, Rooms.Theme" +
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Bookings.Date, Bookings.Time, Locations.City, Rooms.Theme, Rooms.Price, Bookings.BookingID" +
                     "                    FROM Bookings" +
                     "                    JOIN Rooms ON Bookings.RoomID=Rooms.RoomID" +
                     "                    JOIN Locations ON Bookings.LocationID = Locations.LocationID" +
-                    "                    WHERE Bookings.UserID IS NULL AND City = ? " );
-            ps.setString(1,city);
+
+                    "                    WHERE Bookings.UserID IS NULL AND City = ? AND Theme = ? ");
+            ps.setString(1, city);
+            ps.setString(2, theme);
             ResultSet results = ps.executeQuery();
-            while (results.next()==true) {
+            while (results.next()) {
                 JSONObject row = new JSONObject();
                 row.put("Date", results.getString(1));
                 row.put("Time", results.getString(2));
                 row.put("City", results.getString(3));
                 row.put("Theme", results.getString(4));
+                row.put("Price", results.getString(5));
+                row.put("ID", results.getString(6));
                 response.add(row);
             }
-            System.out.println (response.toString());
+            System.out.println(response.toString());
             return response.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"Error\": \"Unable to list items.  Error code xx.\"}";
+            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
         }
     }
+
+    @GET
+    @Path("getBooking/{id}")
+
+    public String getBooking(@PathParam("id") int id) {
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Bookings.Date, Bookings.Time, Locations.City, Rooms.Theme, Rooms.Price, Bookings.BookingID" +
+                    "                    FROM Bookings" +
+                    "                    JOIN Rooms ON Bookings.RoomID=Rooms.RoomID" +
+                    "                    JOIN Locations ON Bookings.LocationID = Locations.LocationID" +
+                    "                    WHERE Bookings.BookingID = ? ");
+
+            ps.setInt(1, id);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                JSONObject row = new JSONObject();
+                row.put("Date", results.getString(1));
+                row.put("Time", results.getString(2));
+                row.put("City", results.getString(3));
+                row.put("Theme", results.getString(4));
+                row.put("Price", results.getString(5));
+                row.put("ID", results.getString(6));
+                return row.toString();
+            }
+            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
+        } catch (SQLException e) {
+            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
+        }
+    }
+
+
 }

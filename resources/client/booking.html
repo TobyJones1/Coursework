@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <meta charset="UTF-8">
-    <title>homepage</title>
+    <title>Tobnet Booking</title>
     <h1 class="title"> Tobnet Escape Rooms</h1>
 
     <script>
@@ -14,23 +14,54 @@
 
             var e = document.getElementById("city");//get value from date picker
             var city = e.options[e.selectedIndex].value;
+
+            e = document.getElementById("theme");//get value from date picker
+            var theme = e.options[e.selectedIndex].value;
+
+
+            var formData = new FormData();
+            formData.append('city', city);
+            formData.append('theme', theme);
+
             const url = "/booking/list/";		// API method on webserver will be in Eaten class with @Path of list
 
-            fetch(url + city, {        			// dateEaten as path param
-                method: "GET",
+
+            fetch(url, {        			// dateEaten as path param
+                method: "POST",
+                body: formData,
             }).then(response => {
                 return response.json();                 //return response to JSON
             }).then(response => {
                 if (response.hasOwnProperty("Error")) { //checks if response from server has a key "Error"
                     alert(JSON.stringify(response));    // if it does, convert JSON object to string and alert
                 } else {
+                    console.log(response);
                     formatList(response);
                 }
             });
         }
 
+        let dataHTML = "";
         function formatList(response){
+            for (let item of response){
+                dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>" +item.Price +"</td><td> <button data-item="+item.ID+" class = \"button\" onclick ='loadBooking()' > Book </button>\""
 
+            }
+
+            document.getElementById("tblBookings").innerHTML += dataHTML;
+        }
+
+        function loadBooking(event) {
+            let id = event.currentTarget.getAttribute('data-item');
+
+            fetch('/booking/getBooking/' + id, {method: 'GET'}
+            ).then(response => response.json()
+            ).then(responseData => {
+                if (responseData.hasOwnProperty('Err')) {
+                    alert("Error");
+                }
+                //responsedata.date gives date for example
+            })
         }
 
     </script>
@@ -38,6 +69,7 @@
 
     <style>
         body {
+
             margin: 0;
             font-family: "lucida console", Helvetica, sans-serif;
             background-color: #003333;;
@@ -99,11 +131,20 @@
             background-color: #45A29E    ;
             color: white;
         }
+
+        .confirmBooking{
+            display: none;
+            position: fixed;
+        }
+
+        .table, th, td{
+            border:1px solid white;
+        }
     </style>
 
 </head>
 
-<body onload="pageLoad()">
+<body >
 <div class="topnav">
     <a  href="home.html">Home</a>
     <a class="active" href="booking.html">Make a Booking </a>
@@ -112,7 +153,7 @@
 
 <br> </br>
 
-<form id=location><label>Choose Location:</label>
+Choose Location:
 
     <select class = "dropdown" name="city" id="city">
         <option value="Newcastle">Newcastle</option>
@@ -120,18 +161,25 @@
         <option value="Reading">Reading</option>
     </select>
     <br><br>
-</form>
 
-<form id=Room<label>Choose Room:</label>
 
-    <select class = "dropdown" name="room" id="room">
+Choose Theme:
+
+    <select class = "dropdown" name="theme" id="theme">
         <option value="Ancient Egypt">Ancient Egypt</option>
         <option value="Whitechapel">Whitechapel</option>
         <option value="Space">Space</option>
     </select>
     <br><br>
-</form>
+
 
 <button class = "button" onclick="getBookingList()"> NEXT </button>
+
+<div class="confirmBooking">
+    <h2>Booking Confirmation</h2>
+
+</div>
+<br>
+<table class = "table" id="tblBookings"> </table>
 </body>
 </html>

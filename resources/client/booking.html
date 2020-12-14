@@ -9,6 +9,8 @@
     <script>
         "use strict";
 
+        let  storedBookingID ;
+
         function getBookingList() {
             console.log("Invoked getBookingList()");		//console.log your BFF for debugging client side
 
@@ -44,7 +46,7 @@
         let dataHTML = "";
         function formatList(response){
             for (let item of response){
-                dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>" +item.Price +"</td><td> <button data-itemID='" + item.ID + "'> Book Now </button></td></tr>";
+                dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>" +item.Price +"</td><td> <button onclick='showBookingForm(" + item.ID + " )'> Book Now </button></td></tr>";
 
             }
 
@@ -62,6 +64,27 @@
                 }
                 //responseData.date gives date for example
             })
+        }
+
+        function showBookingForm(bookingID){
+            console.log("invoked showBooking Form " + bookingID);
+            storedBookingID = bookingID;
+
+            //display the hidden form so user can complete their email address
+            document.getElementById("frmBooking").style.visibility = "visible";
+
+
+        }
+
+        function submitBookingForm(){
+
+            console.log("invoked submitBookingForm()");
+
+
+            let  formData = document.getElementById('frmBooking');
+            formData.append('BookingID', storedBookingIDbookingID);
+
+            //fetch to send formData
         }
 
 
@@ -145,6 +168,14 @@
             border-color: lightblue;
         }
 
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+
+
+
 
     </style>
 
@@ -184,11 +215,25 @@ Choose Theme:
 
 <button class = "button" onclick="getBookingList()"> NEXT </button>
 
-<div class="confirmBooking">
-    <h2>Booking Confirmation</h2>
 
+<div class="row">
+    <div class="column" >
+        <table  id="tblBookings"> </table>
+    </div>
+    <div class="column" >
+        <form id="frmBooking"  style="visibility: hidden;" >
+
+            <input type="text"> Enter email address
+
+            <button onclick="submitBookingForm()"> SUBMIT BOOKING </button>
+        </form>
+
+
+    </div>
 </div>
+
+
 <br>
-<table class = "table" id="tblBookings"> </table>
+
 </body>
 </html>

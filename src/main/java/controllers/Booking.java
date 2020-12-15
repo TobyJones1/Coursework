@@ -28,7 +28,7 @@ public class Booking {
                     "                    JOIN Rooms ON Bookings.RoomID=Rooms.RoomID" +
                     "                    JOIN Locations ON Bookings.LocationID = Locations.LocationID" +
 
-                    "                    WHERE Bookings.UserID IS NULL AND City = ? AND Theme = ? ");
+                    "                    WHERE Bookings.EmailAddress IS NULL AND City = ? AND Theme = ? ");
             ps.setString(1, city);
             ps.setString(2, theme);
             ResultSet results = ps.executeQuery();

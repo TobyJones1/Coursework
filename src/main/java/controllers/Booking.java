@@ -19,9 +19,9 @@ import java.sql.SQLOutput;
 public class Booking {
     @POST
     @Path("list")
-    public String bookingList(@FormDataParam("city") String city, @FormDataParam("theme") String theme) {
-        System.out.println("Invoked Booking.bookingList()" + city + theme);
-        JSONArray response = new JSONArray();
+    public String bookingList(@FormDataParam("city") String city, @FormDataParam("theme") String theme) { //initialises the function and passes in the city and the theme that was chosen by the user
+        System.out.println("Invoked Booking.bookingList()" + city + theme); //invokes bookingList()
+        JSONArray response = new JSONArray(); //initialises JSONArray
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT Bookings.Date, Bookings.Time, Locations.City, Rooms.Theme, Rooms.Price, Bookings.BookingID" +
                     "                    FROM Bookings" +
@@ -29,8 +29,8 @@ public class Booking {
                     "                    JOIN Locations ON Bookings.LocationID = Locations.LocationID" +
 
                     "                    WHERE Bookings.EmailAddress IS NULL AND City = ? AND Theme = ? ");
-            ps.setString(1, city);
-            ps.setString(2, theme);
+            ps.setString(1, city); //sets the first ? as the City
+            ps.setString(2, theme); //sets the second ? as the Theme
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject row = new JSONObject();
@@ -44,7 +44,7 @@ public class Booking {
             }
             System.out.println(response.toString());
             return response.toString();
-        } catch (Exception exception) {
+        } catch (Exception exception) { //if the JSONArray fails
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
         }
@@ -74,8 +74,9 @@ public class Booking {
                 return row.toString();
             }
             return "{\"Error       }\nor\": \"Unable to list items.  Error code xx.\"}";
-        } catch (SQLException e) {
-            return "{\"Error      }\nor\": \"Unable to list items.  Error code xx.\"}";
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error       }\nor\": \"Unable to list items.  Error code xx.\"}";
         }
     }
 

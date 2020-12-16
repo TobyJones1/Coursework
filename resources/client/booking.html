@@ -44,10 +44,10 @@
         }
 
         let dataHTML = "";
-        function formatList(response){
-            for (let item of response){
-                dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>" +item.Price +"</td><td> <button onclick='showBookingForm(" + item.ID + " )'> Book Now </button></td></tr>";
-
+        function formatList(response){ //formats the data from JSON array called response)
+            for (let item of response){  //creates a table with rows for every item in the JSON array
+                dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>"
+                    +item.Price +"</td><td> <button onclick='showBookingForm(" + item.ID + " )'> Book Now </button></td></tr>";
             }
 
             document.getElementById("tblBookings").innerHTML += dataHTML;
@@ -161,7 +161,7 @@
             position: fixed;
         }
 
-        .table, th, td{
+         th, td{
             border:1px solid white;
             border-color: lightblue;
         }

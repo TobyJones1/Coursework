@@ -72,8 +72,6 @@
 
             //display the hidden form so user can complete their email address
             document.getElementById("frmBooking").style.visibility = "visible";
-
-
         }
 
         function submitBookingForm(){
@@ -223,18 +221,9 @@ Choose Theme:
     <div class="column" >
         <form id="frmBooking"  style="visibility: hidden;" >
 
-            <p><input id = emailAddress type="text"> Enter Email Address  </input> </p>
+            <p><input id = EmailAddress type="text"> Enter Email Address  </input> </p>
 
-            <p><input id = groupSize type="number" min="0" max="8"> Enter Group Size  </input> </p>
-
-
-          <!--  <p><input id = numChildren type="number" min="0" max="8"> Enter Number of U16s  </input> </p>
-
-            <p><input id = numStudents type="number" min="0" max="8"> Enter Number of Students  </input> </p>
-
-            <p><input id = numAdults type="number" min="0" max="8"> Enter Number of Adults  </input> </p>
-
-            <p><input id = numPensioners type="number" min="0" max="8"> Enter Number of Over 70s  </input> </p> -->
+            <p><input id = GroupSize type="number" min="1" max="8"> Enter Group Size  </input> </p>
 
 
             <button onclick="submitBookingForm()"> SUBMIT BOOKING </button>

@@ -84,8 +84,7 @@ public class Booking {
     public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) {
         try {
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Bookings" +
-                    "                                             SET EmailAddress = ?" +
-                    "                                             SET GroupSize = ?" +
+                    "                                             SET EmailAddress = ?, GroupSize = ?" +
                     "                                             WHERE BookingID = ?");
             ps.setString(1, EmailAddress);
             ps.setInt(1, GroupSize);

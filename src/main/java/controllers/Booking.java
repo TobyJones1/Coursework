@@ -73,11 +73,27 @@ public class Booking {
                 row.put("ID", results.getString(6));
                 return row.toString();
             }
-            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
+            return "{\"Error       }\nor\": \"Unable to list items.  Error code xx.\"}";
         } catch (SQLException e) {
-            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
+            return "{\"Error      }\nor\": \"Unable to list items.  Error code xx.\"}";
         }
     }
 
+    @POST
+    @Path("update")
+    public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) {
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Bookings" +
+                    "                                             SET EmailAddress = ?" +
+                    "                                             SET GroupSize = ?" +
+                    "                                             WHERE BookingID = ?");
+            ps.setString(1, EmailAddress);
+            ps.setInt(1, GroupSize);
+            ps.setInt(1, BookingID);
+            return "{\"OK\": \"Booking Confirmed\"}";
+        } catch (Exception exception) {
+            return "{\"Error\": \"Unable to confirm item, please see server console for more info.\"}";
+        }
 
+    }
 }

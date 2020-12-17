@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
 
+
+
 @Path("booking/")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
@@ -82,7 +84,7 @@ public class Booking {
 
     @POST
     @Path("update")
-    public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) {
+    public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) { //uses parameters 'EmailAddress', GroupSize and BookingID
 
         System.out.println("Invoked Booking.updateBooking()" + EmailAddress + " " + GroupSize + " " + BookingID );
 
@@ -90,9 +92,12 @@ public class Booking {
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Bookings" +
                     "                                             SET EmailAddress = ?, GroupSize = ?" +
                     "                                             WHERE BookingID = ?");
-            ps.setString(1, EmailAddress);
-            ps.setInt(2, GroupSize);
-            ps.setInt(3, BookingID);
+            ps.setString(1, EmailAddress); //sets first ? as EmailAddress from the EmailAddress parameter that is passed in
+            ps.setInt(2, GroupSize); //sets second ? as GroupSize from the GroupSize parameter that is passed in
+            ps.setInt(3, BookingID); //sets third ? as BookingID from the GroupSize parameter that is passed in
+
+            ps.execute();
+
 
             return "{\"OK\": \"Booking Confirmed\"}";
         } catch (Exception exception) {

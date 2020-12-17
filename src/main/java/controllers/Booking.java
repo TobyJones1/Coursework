@@ -84,7 +84,7 @@ public class Booking {
     @Path("update")
     public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) {
 
-        System.out.println("Invoked Booking.updateBooking()" );
+        System.out.println("Invoked Booking.updateBooking()" + EmailAddress + " " + GroupSize + " " + BookingID );
 
         try {
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Bookings" +
@@ -93,6 +93,7 @@ public class Booking {
             ps.setString(1, EmailAddress);
             ps.setInt(2, GroupSize);
             ps.setInt(3, BookingID);
+
             return "{\"OK\": \"Booking Confirmed\"}";
         } catch (Exception exception) {
             return "{\"Error\": \"Unable to confirm item, please see server console for more info.\"}";

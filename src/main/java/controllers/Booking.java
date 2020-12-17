@@ -82,7 +82,7 @@ public class Booking {
 
     @POST
     @Path("update")
-    public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") int BookingID) {
+    public String updateBooking(@FormDataParam("EmailAddress") String EmailAddress, @FormDataParam("GroupSize") Integer GroupSize, @FormDataParam("BookingID") Integer BookingID) {
 
         System.out.println("Invoked Booking.updateBooking()" );
 

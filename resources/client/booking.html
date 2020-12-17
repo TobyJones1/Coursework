@@ -78,8 +78,7 @@
 
             console.log("invoked submitBookingForm()");
 
-
-            let  formData = document.getElementById('frmBooking');
+            let  formData = new FormData(document.getElementById('frmBooking'));
             formData.append('BookingID', storedBookingID);
 
             const url = "/booking/update";

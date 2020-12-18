@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="allPages.css"/>
     <meta charset="UTF-8">
     <title>Tobnet Booking</title>
     <h1 class="title"> Tobnet Escape Rooms</h1>
@@ -12,23 +12,23 @@
         let  storedBookingID ;
 
         function getBookingList() {
-            console.log("Invoked getBookingList()");		//console.log
+            console.log("Invoked getBookingList()");
 
-            var e = document.getElementById("city");//get value of the city that was chosen
-            var city = e.options[e.selectedIndex].value;
+            var e = document.getElementById("city");//sets e as the value of the city that was chosen
+            var city = e.options[e.selectedIndex].value; //gets the value of the option
 
-            e = document.getElementById("theme");//get value of the room theme that was chosen
-            var theme = e.options[e.selectedIndex].value;
+            e = document.getElementById("theme");//sets e as value of the room theme that was chosen
+            var theme = e.options[e.selectedIndex].value; //gets the value of the option
 
 
             var formData = new FormData();
             formData.append('city', city);
             formData.append('theme', theme);
 
-            const url = "/booking/list/";		// API method on webserver will be in Eaten class with @Path of list
+            const url = "/booking/list/";		// API method on webserver will be in booking class with @Path of list
 
 
-            fetch(url, {        			// dateEaten as path param
+            fetch(url, {
                 method: "POST",
                 body: formData,
             }).then(response => {
@@ -43,28 +43,30 @@
             });
         }
 
-        let dataHTML = "";
+        let dataHTML = ""; //makes an empty string called dataHTML
         function formatList(response){ //formats the data from JSON array called response)
             for (let item of response){  //creates a table with rows for every item in the JSON array
+
                 dataHTML +="<tr><td>" +item.City +"</td><td>" +item.Theme +"</td><td>" +item.Date +"</td><td>" +item.Time +"</td><td>"
                     +item.Price +"</td><td> <button onclick='showBookingForm(" + item.ID + " )'> Book Now </button></td></tr>";
             }
 
-            document.getElementById("tblBookings").innerHTML += dataHTML;
+            document.getElementById("tblBookings").innerHTML += dataHTML; //adds the data in dataHTML to the table called tblBookings
+            document.getElementById("tblBookings").style.visibility = "visible";
         }
 
-        function loadBooking(event) {
-            let id = event.currentTarget.getAttribute('data-item');
+        //  function loadBooking(event) {
+        //let id = event.currentTarget.getAttribute('data-item');
 
-            fetch('/booking/getBooking/' + id, {method: 'GET'}
-            ).then(response => response.json()
-            ).then(responseData => {
-                if (responseData.hasOwnProperty('Err')) {
-                    alert("Error");
-                }
-                //responseData.date gives date for example
-            })
-        }
+        //  fetch('/booking/getBooking/' + id, {method: 'GET'}
+        // ).then(response => response.json()
+        //  ).then(responseData => {
+        //      if (responseData.hasOwnProperty('Error')) {
+        //          alert("Error");
+        //      }
+        //responseData.date gives date for example
+        // })
+        // }
 
         function showBookingForm(bookingID){
             console.log("invoked showBooking Form " + bookingID);
@@ -76,15 +78,15 @@
 
         function submitBookingForm(){
 
-            console.log("invoked submitBookingForm()");
+            console.log("invoked submitBookingForm()"); //invokes submitBookForm on console
 
             let  formData = new FormData(document.getElementById('frmBooking'));
             formData.append('BookingID', storedBookingID);
 
-            const url = "/booking/update";
+            const url = "/booking/update";  //the API method will be in the booking class with the @Path of update
 
             fetch(url, {
-                method: "POST",
+                method: "POST",     //it is a post method
                 body: formData,
             }).then(response => {
                 return response.json();                 //return response to JSON
@@ -93,7 +95,7 @@
                     alert(JSON.stringify(response));    // if it does, convert JSON object to string and alert
                 } else {
                     console.log(response);
-                    alert("Booking made.  Look out for your email confirmation.")
+                    alert("Booking made successfully") //alert box saying booling made successfully
                 }
             });
         }
@@ -168,20 +170,45 @@
             color: white;
         }
 
-        .confirmBooking{
-            display: none;
-            position: fixed;
-        }
 
-         th, td{
-            border:1px solid white;
-            border-color: lightblue;
-        }
 
         .column {
             float: left;
             width: 50%;
         }
+
+        .styled-table { /*class name of the table*/
+            margin-left: 10px; /*so table is not pressed right up against the edge of the margin */
+            border-collapse: collapse; /*ensures there is no space between cell borders */
+            font-size: 0.9em;
+            font-family: "lucida console", Helvetica, sans-serif;;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* adds a subtle shadow around the box*/
+            background-color: #116466;
+            color: lightgrey;
+            width: 110%;
+
+        }
+
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }/*spaces out the data in the table */
+
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd; /*adds a bottom border to each row for separation*/
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;  /*makes the background of every other row a different colour */
+            color: #003333;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879; /*makes the bottom of the table have a border so it is clear that it is the bottom of the table*/
+        }
+
 
 
 
@@ -205,22 +232,22 @@
 
 Choose Location:
 
-    <select class = "dropdown" name="city" id="city">
-        <option value="Newcastle">Newcastle</option>
-        <option value="Manchester">Manchester</option>
-        <option value="Reading">Reading</option>
-    </select>
-    <br><br>
+<select class = "dropdown" name="city" id="city">
+    <option value="Newcastle">Newcastle</option>
+    <option value="Manchester">Manchester</option>
+    <option value="Reading">Reading</option>
+</select>
+<br><br>
 
 
 Choose Theme:
 
-    <select class = "dropdown" name="theme" id="theme">
-        <option value="Ancient Egypt">Ancient Egypt</option>
-        <option value="Whitechapel">Whitechapel</option>
-        <option value="Space">Space</option>
-    </select>
-    <br><br>
+<select class = "dropdown" name="theme" id="theme">
+    <option value="Ancient Egypt">Ancient Egypt</option>
+    <option value="Whitechapel">Whitechapel</option>
+    <option value="Space">Space</option>
+</select>
+<br><br>
 
 
 <button class = "button" onclick="getBookingList()"> NEXT </button>
@@ -228,11 +255,18 @@ Choose Theme:
 
 <div class="row">
     <div class="column" >
-        <table  id="tblBookings"> </table>
+        <table class="styled-table" id="tblBookings" style="visibility:hidden"> <!-- the table starts off as hidden and is given a class for css and an id-->
+            <th>Location</th>
+            <th>Room Theme</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Price</th>
+            <th> </th>
+        </table>
     </div>
     <div class="column" >
 
-        <form id="frmBooking"  style="visibility: hidden;" >
+        <form id="frmBooking"  style="visibility: hidden; float:right; padding-right: 85px" >
 
 
 

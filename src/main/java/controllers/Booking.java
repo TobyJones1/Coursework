@@ -46,9 +46,9 @@ public class Booking {
             }
             System.out.println(response.toString());
             return response.toString();
-        } catch (Exception exception) { //if the JSONArray fails
+        } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"Err       }\nor\": \"Unable to list items.  Error code xx.\"}";
+            return "{\"Error       }\nor\": \"Unable to list items.  Error code xx.\"}";
         }
     }
 

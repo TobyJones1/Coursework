@@ -1,0 +1,44 @@
+
+
+body {
+
+    margin: 0;
+    font-family: "lucida console", Helvetica, sans-serif;
+    background-color: #003333;;
+    font-size: 17px;
+    color:  #45A29E;
+}
+
+
+.title{
+    font-family: Castellar;
+    color: lightblue;
+    font-weight: bold;
+    font-size: 40px;
+    padding-left:10px;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #116466;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 19px;
+    font-family: Castellar;
+}
+
+.topnav a:hover {
+    background-color: #D1E8E2;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #45A29E    ;
+    color: white;
+}
